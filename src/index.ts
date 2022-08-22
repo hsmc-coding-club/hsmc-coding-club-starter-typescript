@@ -13,7 +13,7 @@ if(autoRunFile.enable) {
     console.log(`---------------------`);
     console.log(``);
     console.log(``);
-    require(autoRunFile.fileDir.replace(`.ts`, ``).replace(`.js`, ``)).run();
+    require(autoRunFile.fileDir.replace(`.ts`, ``).replace(`.js`, ``));
 } else {
     // Swap Files
     glob(`./${path.basename(__dirname)}/sandboxes/**/*.*`, async (err, files) => {
@@ -30,8 +30,6 @@ if(autoRunFile.enable) {
             console.log(`[SANDBOX] Launching File: ${valSplit[valSplit.length - 1]}`);
             console.log(`---------------------`);
             console.log(``);
-            console.log(``);
-
             // Run the file
             require(`./sandboxes/${valueIndex.value.replace(`.ts`, ``).replace(`.js`, ``)}`);
         });

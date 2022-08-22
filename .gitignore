@@ -1,0 +1,10 @@
+# Node Modules
+node_modules/
+
+# Compiled Code
+dist/**/*.js
+dist/**/*.map
+dist/**/*.json
+
+# VSCode Settings
+.vscode/

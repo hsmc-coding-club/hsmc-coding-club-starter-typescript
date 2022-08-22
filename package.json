@@ -1,0 +1,30 @@
+{
+  "name": "hsmc-coding-club-typescript-starter",
+  "version": "1.0.0",
+  "description": "The starter typescript folder for the HSMC Coding Club!",
+  "main": "index.ts",
+  "scripts": {
+    "run": "ts-node-dev --respawn --ignore-watch data ./src/index.ts",
+    "run-dev": "ts-node-dev --respawn --ignore-watch data ./src/index.ts",
+    "run-js": "node dist/index.js",
+    "build": "tsc"
+  },
+  "author": "hershraj",
+  "license": "GPL-3.0",
+  "devDependencies": {
+    "@types/glob": "^7.2.0",
+    "@types/node": "^18.7.9",
+    "@typescript-eslint/eslint-plugin": "^5.33.1",
+    "@typescript-eslint/parser": "^5.33.1",
+    "eslint": "^8.22.0",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^4.7.4"
+  },
+  "dependencies": {
+    "axios": "^0.27.2",
+    "cli-select": "^1.1.2",
+    "ejs": "^3.1.8",
+    "express": "^4.18.1",
+    "glob": "^8.0.3"
+  }
+}

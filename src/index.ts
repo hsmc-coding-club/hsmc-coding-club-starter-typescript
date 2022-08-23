@@ -27,7 +27,7 @@ glob(`./${path.basename(__dirname)}/sandboxes/*.zip`, async (error, matches) => 
         console.log(``);
     }
 });
-setTimeout(fileSwapper, 1000);
+setTimeout(fileSwapper, 1500);
 
 
 

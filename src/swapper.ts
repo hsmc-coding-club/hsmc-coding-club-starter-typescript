@@ -8,7 +8,7 @@ export function fileSwapper(): void {
             if(err) throw err;
 
             // The "index" file of a project has to have the word index in it somewhere!
-            files = files.filter(f => ((f.endsWith(`.js`) || f.endsWith(`.ts`)) && f.toLowerCase().includes(`index`)) &&! f.includes(`sandbox-template`));
+            files = files.filter(f => ((f.endsWith(`.js`) || f.endsWith(`.ts`)) && (f.toLowerCase().includes(`index`) || f.toLowerCase().includes(`start`))) &&! f.includes(`sandbox-template`));
             let formattedFiles = files.map(f => f.replace(`./${path.basename(__dirname)}/sandboxes/`, ``));
             console.log(`[SANDBOX] Please select a file to run: `);
             cliSelect({

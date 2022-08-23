@@ -1,38 +1,33 @@
 import glob from 'glob';
 import path from 'path';
-import cliSelect from 'cli-select';
+import fs from 'fs';
+import unzipper from 'unzipper';
+import {fileSwapper} from './swapper';
 
-let autoRunFile = {
-    enable: false,
-    fileDir: `./sandboxes/google-questions/google-questions.ts`
-};
+console.log(`[SANDBOX] Scanning for new sandbox files...`);
+// Check for any new sandboxes
+glob(`./${path.basename(__dirname)}/sandboxes/*.zip`, async (error, matches) => {
+    if(matches.length > 0) {
+        console.log(`[SANDBOX] Found ${matches.length} new enviroments. Setting up....`);
+        for (let i = 0; i < matches.length; i++) {
+            let currentFileDir = matches[i];
+            let matchSplit = currentFileDir.split(`/`);
+            let fileName = matchSplit[matchSplit.length - 1].toLowerCase().replace(`.zip`, ``);
 
-if(autoRunFile.enable) {
-    let fSplit = autoRunFile.fileDir.split(`/`);
-    console.log(`[SANDBOX] Auto-Launching File: ${fSplit[fSplit.length - 1]}`);
-    console.log(`---------------------`);
-    console.log(``);
-    console.log(``);
-    require(autoRunFile.fileDir.replace(`.ts`, ``).replace(`.js`, ``));
-} else {
-    // Swap Files
-    glob(`./${path.basename(__dirname)}/sandboxes/**/*.*`, async (err, files) => {
-        if(err) throw err;
+            // Extract the data
+            await fs.createReadStream(currentFileDir).pipe(unzipper.Extract({ path: `./${path.basename(__dirname)}/sandboxes` }));
 
-        // The "index" file of a project has to have the word index in it somewhere!
-        files = files.filter(f => ((f.endsWith(`.js`) || f.endsWith(`.ts`)) && f.toLowerCase().includes(`index`)) &&! f.includes(`sandbox-template`));
-        let formattedFiles = files.map(f => f.replace(`./${path.basename(__dirname)}/sandboxes/`, ``));
-        console.log(`[SANDBOX] Please select a file to run: `);
-        cliSelect({
-            values: formattedFiles
-        }, (valueIndex: any) => {
-            let valSplit = valueIndex.value.split(`/`);
-            console.log(`[SANDBOX] Launching File: ${valSplit[valSplit.length - 1]}`);
-            console.log(`---------------------`);
+            // Delete the ZIP
+            fs.unlinkSync(currentFileDir);
+            console.log(`[SANDBOX] Setup enviroment '${fileName}'!`);
             console.log(``);
-            // Run the file
-            require(`./sandboxes/${valueIndex.value.replace(`.ts`, ``).replace(`.js`, ``)}`);
-        });
-    });
-}
+        }
+    } else {
+        console.log(`[SANDBOX] No matches found.`);
+        console.log(``);
+    }
+});
+setTimeout(fileSwapper, 1000);
+
+
 

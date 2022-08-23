@@ -12,6 +12,8 @@ app.get(`/`, (req, res) => {
     res.sendFile(path.join(__dirname, `/site/index.html`));
 });
 
+console.log(`[SANDBOX] Starting site on port ${port}...`);
+
 app.listen(port, async () => {
-    console.log(`Site up and running at http://127.0.0.1:${port}/`);
+    console.log(`[SANDBOX] Site up and running at http://127.0.0.1:${port}/`);
 });

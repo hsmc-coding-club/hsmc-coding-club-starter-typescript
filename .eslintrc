@@ -16,10 +16,6 @@
         "@typescript-eslint"
     ],
     "rules": {
-        "quotes": [
-            "warn",
-            "backtick"
-        ],
         "semi": [
             "error",
             "always"
@@ -43,7 +39,7 @@
             "error"
         ],
         "no-unused-vars": [
-            "error"
+            "off"
         ],
         "@typescript-eslint/explicit-function-return-type": [
             "error"
